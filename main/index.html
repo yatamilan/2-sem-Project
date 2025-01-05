@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic webpage settings that help browsers understand our page -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YA Portfolio</title>
+
+    <!-- Getting special fonts from Google to make our text look pretty -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hedvig+Letters+Serif:opsz@12..24&family=Josefin+Sans:ital,wght@1,300&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* These are our website's special colors that we'll use everywhere */
+        :root {
+            --primary-color: #2563eb;    /* Our main blue color */
+            --accent-color: #f564b9;     /* Our special pink color for important things */
+            --dark-bg: #1a1a1a;          /* Dark color for backgrounds */
+            --light-bg: #f8fafc;         /* Light color for backgrounds */
+            --text-dark: #1e293b;        /* Dark color for normal text */
+            --text-light: #f8fafc;       /* Light color for text on dark backgrounds */
+        }
+
+        /* Makes sure our page looks clean and neat */
+        body {
+            margin: 0;                    /* No extra space around the edges */
+            padding: 0;                   /* No extra padding inside */
+            background-color: var(--light-bg);  /* Light colored background */
+            font-family: 'Roboto', sans-serif;  /* Our main text style */
+            line-height: 1.6;            /* Space between lines of text */
+            color: var(--text-dark);     /* Color of our main text */
+        }
+
+        /* The top bar of our website that stays visible when scrolling */
+        header {
+            background: linear-gradient(135deg, var(--dark-bg), var(--primary-color)); /* Pretty color fade effect */
+            padding: 1.25rem;            /* Space inside the header */
+            position: sticky;            /* Makes it stick to the top when scrolling */
+            top: 0;                      /* Sticks to the very top */
+            z-index: 1000;              /* Makes sure it stays on top of other things */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);  /* Adds a nice shadow */
+            display: flex;               /* Helps organize things in a row */
+        }
+
+        #logo {
+            height: 3.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        /* Enhanced menu styles */
+        .menu {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .menu li {
+            margin: 0;
+        }
+
+        .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced image slider */
+        .image-slider {
+            max-width: 1400px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .slides {
+            height: 600px;
+            object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Content section improvements */
+        .content-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .para {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        #bri {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        pre {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            white-space: pre-wrap;
+            margin: 2rem 0;
+        }
+
+        /* Enhanced button styling */
+        .button img {
+            transition: transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .button img:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modern footer styling */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg), var(--primary-color));
+            color: var(--text-light);
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .footer-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col h4 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: var(--accent-color);
+            height: 2px;
+            width: 50px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--text-light);
+            padding-left: 10px;
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        .footer-col .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-col .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* Animation improvements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .left-to-right {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .left-to-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive improvements */
+        @media only screen and (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+                margin: 2rem 1rem;
+            }
+
+            .slides {
+                height: 400px;
+            }
+
+            pre {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .footer-col {
+                margin-bottom: 1.5rem;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .menu {
+                width: 100%;
+                margin: 0;
+            }
+
+            .menu ul {
+                justify-content: center;
+            }
+        }
+
+        /* Add to your existing CSS */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        .footer-bottom .credits {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-bottom .credits a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom .credits a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        /* Dark mode toggle button styling */
+        .dark-mode-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Dark mode specific styles */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .dark-mode .content-section {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+
+        .dark-mode .footer-col {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- The top part of our website with navigation -->
+    <header>
+        <div class="logo">
+            <img src="Materisls/YA Tamilan.png" alt="YA Tamilan Logo" id="logo">
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index 2.html">Anime Playlist</a></li>
+                <li><a href="index 3.html">Friends Info</a></li>
+                <li><a href="index 4.html">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Dark mode toggle button -->
+        <button id="darkModeToggle" class="dark-mode-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <!-- The sliding pictures at the top of our page -->
+    <div class="image-slider">
+        <!-- Each picture in our slider -->
+        <img class="slides" src="Materisls/ya1.png" alt="Slide 1">
+        <!-- More slider images... -->
+    </div>
+
+    <!-- The main part of our page with cool fade-in effects -->
+    <div class="content-section fade-in">
+        <!-- Content that slides in from the left -->
+        <div class="left-to-right">
+            <div class="para">
+                <img src="Materisls/brilliant.png" id="bri">
+                <p>
+                <pre>         I can teach you the simple study skills
+you need to earn better grades + minimize the
+        stress and overwhelm that comes with 
+        being a busy, working college student.</pre>
+                </p>
+                <h3>Click the button below to Learn Where I Can Learn The <span>Web Development</span>.</h3>
+                <div class="button">
+                    <a href="https://www.w3schools.com/" target="_blank"><img src="Materisls/ready.png" width="400px" height="100px"></a>
+                </div>
+            </div>
+            <div class="next-para">
+                <p>
+                <pre id="p1"><strong>This is for the college student.</strong> You were born for this. We 
+        believe that <strong>every college student has the ability and power within her to become 
+    extraordinarily brilliant</strong> regardless of her circumstances, background, past grades and failures.</pre>
+                </p>
+                <p>
+                <pre id="p2"><strong>We understand what this degree represents.</strong> The weight that it holds. The failure you’ve had 
+    to overcome. The people you’ve vowed to prove wrong. <strong>We’re here to bare witness to that 
+    radiant confidence that you’ve earned.</strong> We’re here to remind you that you’re smart enough, 
+                                talented enough and worthy enough of academic success.</pre>
+                </p>
+                <div class="ready">
+                    <img src="Materisls/classes.png">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The bottom part of our website with important links -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>This is my first portfolio for college mini project. I'm passionate about web development and creating meaningful digital experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index 2.html">Anime Playlist</a></li>
+                        <li><a href="index 3.html">Friends Info</a></li>
+                        <li><a href="index 4.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>Email: your.email@example.com</li>
+                        <li>Phone: +1234567890</li>
+                        <li>Location: Your City, Country</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/its_me_yukesh_uzumaki/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YA Tamilan. All rights reserved.</p>
+                <p class="credits">Built with help from 
+                    <a href="https://www.w3schools.com/" target="_blank">W3Schools</a> and 
+                    <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<!-- Special effects that make our website more interesting -->
+<script>
+    // Makes our pictures change automatically
+    let slideIndex = 0;
+    showSlides();
+
+    // Function that controls how pictures change
+    function showSlides() {
+        const slides = document.getElementsByClassName("slides");
+        
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        
+        // Show next slide
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+        
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 4000); // Change slide every 4 seconds
+    }
+
+    // Makes things appear nicely when you scroll down
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px'
+    };
+
+    // Watches for when you scroll and shows content
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Starts watching for things to appear when the page loads
+    document.addEventListener("DOMContentLoaded", () => {
+        // Observe fade-in elements
+        document.querySelectorAll('.fade-in, .left-to-right').forEach(el => {
+            observer.observe(el);
+        });
+    });
+
+    // Get the dark mode toggle button element
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Check if user previously enabled dark mode
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    
+    // Function to enable dark mode
+    function enableDarkMode() {
+        // Add dark-mode class to body
+        document.body.classList.add('dark-mode');
+        // Update button icon to sun
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        // Save user preference
+        localStorage.setItem('darkMode', 'enabled');
+    }
+    
+    // Function to disable dark mode
+    function disableDarkMode() {
+        // Remove dark-mode class from body
+        document.body.classList.remove('dark-mode');
+        // Update button icon to moon
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        // Save user preference
+        localStorage.setItem('darkMode', null);
+    }
+    
+    // Apply dark mode if previously enabled
+    if (isDarkMode) {
+        enableDarkMode();
+    }
+    
+    // Toggle dark mode when button is clicked
+    darkModeToggle.addEventListener('click', () => {
+        // Check if dark mode is enabled
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        
+        // Toggle dark mode based on current state
+        if (isDarkMode) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+    
+    // Listen for system color scheme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        // Automatically switch to dark mode if system preference changes
+        if (e.matches) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    });
+</script>
+
+<!-- Gets special icons for our social media buttons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</html>

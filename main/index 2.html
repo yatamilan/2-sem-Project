@@ -1,0 +1,608 @@
+<!-- Main HTML document for the Anime Playlist page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Essential meta tags for proper browser rendering and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watched Anime</title>
+    
+    <!-- External font and icon resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Global CSS variables for consistent color scheme throughout the site */
+        :root {
+            --primary-color: #2563eb;    /* Main blue color */
+            --accent-color: #f564b9;     /* Pink highlight color */
+            --dark-bg: #1a1a1a;          /* Dark background */
+            --light-bg: #f8fafc;         /* Light background */
+            --text-dark: #1e293b;        /* Dark text color */
+            --text-light: #f8fafc;       /* Light text color */
+            --card-bg: rgba(255, 255, 255, 0.1);  /* Transparent card background */
+        }
+
+        /* Base body styles with gradient background */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        /* Header with glass effect and sticky positioning */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo container styles */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Logo text highlight */
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Main content wrapper */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Page title section */
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        /* Main heading with gradient text effect */
+        .page-title h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Subtitle styles */
+        .page-title h2 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            opacity: 0.8;
+            margin: 0.5rem 0;
+        }
+
+        /* Individual anime section cards */
+        .anime-section {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Anime title styling */
+        .anime-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Grid layout for media items */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Individual media item containers */
+        .media-item {
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect for media items */
+        .media-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Styles for images and videos within media items */
+        .media-item img, 
+        .media-item video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Telegram link overlay styles */
+        .telegram-link {
+            position: relative;
+        }
+
+        /* Telegram link hover text */
+        .telegram-link::after {
+            content: 'Join Telegram Channel';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        /* Show telegram link text on hover */
+        .telegram-link:hover::after {
+            transform: translateY(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .anime-title {
+                font-size: 1.5rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0 1rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-col p {
+            color: var(--text-light);
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .footer-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Enhanced menu styles */
+        .menu {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .menu li {
+            margin: 0;
+        }
+
+        .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Add this with your other media-item styles */
+        .media-item iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <div class="logo">
+        <h3><span>YA</span> Tamilan</h3>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index 2.html">Anime Playlist</a></li>
+                <li><a href="index 3.html">Friends Info</a></li>
+                <li><a href="index 4.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content container -->
+    <div class="container">
+        <div class="page-title">
+            <h1>YA Anime Collection</h1>
+            <h2>My Favorite Anime Playlist</h2>
+        </div>
+
+        <!-- Naruto Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">NARUTO</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@NARUTO_IN_TAMILG">
+                        <img src="https://wallpapercave.com/wp/wp4849606.jpg" alt="Naruto Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://wallpaperaccess.com/full/1112046.jpg" alt="Naruto Single Pic">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/npWCCx9vj5o?si=qeBi9e2HY74nFwi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dragon Ball Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Dragon Ball</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@Dragon_Ball_Z_Tamil_In">
+                        <img src="https://wallpapercave.com/wp/wp7388525.jpg" alt="Dragon Ball Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://wallpapercave.com/wp/wp9383693.jpg" alt="Dragon Ball Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/xZJJ5UQQR8Q?si=cSgcci5OY0JI1h0Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jujutsu Kaisen Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Jujutsu Kaisen</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@Series_jujutsu_kaisen_Tamil">
+                        <img src="https://www.xtrafondos.com/wallpapers/personajes-de-jujutsu-kaisen-7554.jpg" alt="JJK Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://1.bp.blogspot.com/-bmsMwd-LEDM/X75rvi_Q8hI/AAAAAAAAFks/Nsx4QaBb99gd-ulyaBT1wEHoAb_PM0PnwCNcBGAsYHQ/w919-h516-p-k-no-nu/satoru-gojo-jujutsu-kaisen-uhdpaper.com-4K-8.1778-wp.thumbnail.jpg" alt="Gojo">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/IXoJhKqK_b0?si=2_5IeK2r4AyARZtC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tokyo Revengers Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Tokyo Revengers</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@Tokyo_Revengers_Dub">
+                        <img src="https://otakukart.com/wp-content/uploads/2021/06/Tokyo-Revengers-Season-2-770x433.jpg" alt="Tokyo Revengers Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://staticg.sportskeeda.com/editor/2022/04/2c296-16498038754169-1920.jpg" alt="Tokyo Revengers Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/hrk-T11STCo?si=mFIW_9k3arzU8F4F" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Life of Immortal King Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">The Daily Life of Immortal King</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@The_Daily_Life_of_king_immortal">
+                        <img src="https://i.ytimg.com/vi/wrKySCxzVDk/maxresdefault.jpg" alt="Daily Life of Immortal King">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://1.bp.blogspot.com/-w94yTBatcpY/XoJ3do3NkBI/AAAAAAAACc0/vEyzbQMg1o0IEorYbkoUxVw0WakbQ_LTgCLcBGAsYHQ/s1600/The%2BDaily%2BLife%2Bof%2Bthe%2BImmortal%2BKing%2Be.jpg" alt="Immortal King Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/qT_59-jygjQ?si=U3DooxUiqCypJ4Zg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pokémon Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Pokémon</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href=""https://t.me/Pokemon_Sun_And_Moon_Tamil1>
+                        <img src="https://as01.epimg.net/meristation_en/imagenes/2023/01/09/news/1673296999_502541_1673297148_noticia_normal.jpg" alt="Pokémon">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/06/pokemon-leon-ash-blue-best-series.jpg" alt="Tanjiro Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/GsATQQJ9QiM?si=-j9s9OWyA00rGzn8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- One Punch Man Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">One Punch Man</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://t.me/One_Punch_Man_English_Dub/967">
+                        <img src="https://th.bing.com/th/id/R.0ab6080bfa74b91bb5a000ce772a7742?rik=ADFrtlle513HHQ&riu=http%3a%2f%2forig02.deviantart.net%2f135d%2ff%2f2015%2f298%2f8%2ff%2fone_punch_man_wallpaper_anime_by_corphish2-d9eapuc.jpg&ehk=FimWwwXeEFXQsZggiIRS%2bPKHXTv3yOEvU9MuR9kSTkk%3d&risl=1&pid=ImgRaw&r=0" alt="One Punch Man Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://th.bing.com/th/id/OIP.LZhxBiWydGNB_TchWRAm7wAAAA?rs=1&pid=ImgDetMain" alt="Saitama Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/qnbqa7KS-Bs?si=IHvl0bMP0n8G0JIB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mashle: Magic and Muscles Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Mashle: Magic and Muscles</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://t.me/Mashle_Magic_And_Muscle_TamilDub">
+                        <img src="https://www.hindustantimes.com/ht-img/img/2023/04/08/1600x900/Mashle_Magic_and_Muscles_1680921912336_1680921926407_1680921926407.jpg" alt="Mashle Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://images.alphacoders.com/131/thumb-1920-1310693.jpeg" alt="Mash Burnedead Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/obgFREsigps?si=o4nD0bUIPSTy1xms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classroom of the Elite Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Classroom of the Elite</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://web.telegram.org/k/#@classroom_of_the_elite_tamil">
+                        <img src="https://i.pinimg.com/originals/bf/65/2d/bf652dd2ddf8ca1c73ca04c79fff15ce.jpg" alt="COTE Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://w0.peakpx.com/wallpaper/572/470/HD-wallpaper-anime-classroom-of-the-elite-alice-sakayanagi-honami-ichinose-kakeru-ry%C5%ABen-kiky%C5%8D-kushida-kiyotaka-ayanok%C5%8Dji-k%C5%8Dhei-katsuragi-mio-ibuki-ry%C5%ABji-kanzaki-suzune-horikita.jpg" alt="Ayanokoji Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/zeUERsJeWCs?si=1r8wtiAh_wcWnBuV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solo Leveling Section -->
+        <div class="anime-section">
+            <h3 class="anime-title">Solo Leveling</h3>
+            <div class="media-grid">
+                <div class="media-item telegram-link">
+                    <a href="https://t.me/c/2142152292/128">
+                        <img src="https://th.bing.com/th/id/OIP.o9J9ga4MJRu52gEsBZpJYQHaLH?rs=1&pid=ImgDetMain" alt="Solo Leveling Poster">
+                    </a>
+                </div>
+                <div class="media-item">
+                    <img src="https://wallpapercave.com/wp/wp9218785.jpg" alt="Sung Jin-Woo Wallpaper">
+                </div>
+                <div class="media-item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lz1cV3kt1mc?si=fKMH_yFZe88Z0P4Z&amp;start=6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Anime Collection</h4>
+                    <p>Welcome to my anime collection! This is where I share my favorite anime series, all available in Tamil dub. Each series has been carefully selected for its unique story, amazing animation, and memorable characters.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index 2.html">Anime Playlist</a></li>
+                        <li><a href="index 3.html">Friends Info</a></li>
+                        <li><a href="index 4.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Anime Categories</h4>
+                    <ul>
+                        <li>Action & Adventure</li>
+                        <li>Fantasy & Magic</li>
+                        <li>School Life</li>
+                        <li>Supernatural</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow For Updates</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/its_me_yukesh_uzumaki/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+    </div>
+    </div>
+    </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YA Tamilan Anime Collection. All rights reserved.</p>
+                <p class="credits">Built with help from 
+                    <a href="https://www.w3schools.com/" target="_blank">W3Schools</a> and 
+                    <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+                </p>
+    </div>
+    </div>
+    </footer>
+</body>
+
+</html>

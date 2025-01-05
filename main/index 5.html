@@ -1,0 +1,315 @@
+<!-- Main login page document -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Essential meta tags for proper rendering and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - YA Tamilan</title>
+    <!-- External resources for fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global CSS variables for consistent theming */
+        :root {
+            --primary-color: #2563eb;    /* Main blue color used for buttons and links */
+            --accent-color: #f564b9;     /* Pink accent color for hover states and highlights */
+            --dark-bg: #1a1a1a;          /* Dark background color for contrast elements */
+            --text-light: #f8fafc;       /* Light text color for better readability */
+            --card-bg: rgba(255, 255, 255, 0.1);  /* Semi-transparent white for glass effect */
+        }
+
+        /* Base page styling with gradient background */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        /* Header with glass morphism effect and sticky positioning */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo container styling */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Logo text styling */
+        .logo h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Logo accent color */
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        /* Navigation menu with glass effect */
+        .menu {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        /* Navigation list layout */
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        /* Navigation list items */
+        .menu li {
+            margin: 0;
+        }
+
+        /* Navigation links styling */
+        .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation hover effects */
+        .menu a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Main login form container with glass effect */
+        .login-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Welcome heading with gradient text */
+        h1 {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Form group container */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Form labels */
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Input fields styling */
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Input focus states */
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        /* Login button styling */
+        input[type="button"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+         /* Submit button hover effects */
+         input[type="button"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 100, 185, 0.3);
+        }
+
+        /* Social login section */
+        .social-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        /* Social section heading */
+        .social-section h3 {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Social links container */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Individual social link styling */
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Social link hover effects */
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Signup redirect section */
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-light);
+        }
+
+        /* Signup link styling */
+        .signup-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Signup link hover effect */
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .menu a {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<!-- Main content -->
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <!-- Site logo -->
+        <div class="logo">
+            <h3><span>YA</span> Tamilan</h3>
+        </div>
+        <!-- Navigation menu -->
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index 2.html">Anime Playlist</a></li>
+                <li><a href="index 3.html">Friends Info</a></li>
+                <li><a href="index 4.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main login form container -->
+    <div class="login-container">
+        <h1>Welcome Back!</h1>
+        <!-- Login form -->
+        <form>
+            <!-- Email input field -->
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email" required />
+            </div>
+            <!-- Password input field -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" required />
+            </div>
+            <!-- Login button -->
+            <input type="button" value="Login" />
+
+            <!-- Social login options -->
+            <div class="social-section">
+                <h3>Or connect with</h3>
+                <!-- Social media links -->
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <!-- Signup redirect -->
+            <div class="signup-link">
+                <p>Don't have an account? <a href="index 4.html">Sign up here</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

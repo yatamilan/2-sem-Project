@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YA's Friends</title>
+    <link rel="shortcut icon" type="x-icon" href="YA Logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS custom properties (variables) for consistent theming across the site */
+        :root {
+            --primary-color: #2563eb;    /* Main blue color used for primary elements and gradients */
+            --accent-color: #f564b9;     /* Pink accent color for highlights and hover effects */
+            --dark-bg: #1a1a1a;          /* Dark background color for contrast elements */
+            --text-light: #f8fafc;       /* Light text color for better readability on dark backgrounds */
+            --card-bg: rgba(255, 255, 255, 0.1);  /* Semi-transparent white for card backgrounds with glass effect */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        /* Enhanced header and menu styles */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .menu {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .menu li {
+            margin: 0;
+        }
+
+        .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .menu a:hover {
+            background: var(--accent-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .menu ul {
+                gap: 1rem;
+            }
+
+            .menu a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem;
+            }
+
+            .logo h3 {
+                font-size: 1.2rem;
+            }
+
+            .menu ul {
+                gap: 0.5rem;
+            }
+
+            .menu a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .friend-section {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 0 auto;
+            max-width: 1000px;
+            height: auto;
+            min-height: 300px;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(75%);
+            transition: all 0.5s ease;
+        }
+
+        .image-card:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        .image-card:hover img {
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .para {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 0 1rem;
+        }
+
+        .para a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .para a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .para {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .friend-section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer Styles */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: var(--accent-color);
+        }
+
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 3rem;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-col p {
+            color: var(--text-light);
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+            padding-left: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .credits {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .credits a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 992px) {
+            .footer-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+
+            .footer-col h4::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h3><span>YA</span> Tamilan</h3>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index 2.html">Anime Playlist</a></li>
+                <li><a href="index 3.html">Friends Info</a></li>
+                <li><a href="index 4.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-title">
+        <h1>My Friends Circle</h1>
+        <h1>(Set Your Friends Photos Here) Delete This Text</h1>
+    </div>
+
+    <!-- Friend sections with enhanced structure -->
+    <!-- Example for one section, repeat for others -->
+    <div class="friend-section">
+        <!-- Ash Section -->
+    <div class="friend-section">
+        <h2 class="ash">Ash Ketchum</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://2danicritic.github.io/index_files/ReviewImages/review_Pokemon_-_The_First_Movie2.jpg" alt="Ash 1">
+            </div>
+            <div class="image-card">
+                <img src="https://staticg.sportskeeda.com/editor/2023/02/394a3-16769313907566-1920.jpg" alt="Ash 2">
+            </div>
+            <div class="image-card">
+                <img src="https://staticg.sportskeeda.com/editor/2023/02/394a3-16769313907566-1920.jpg" alt="Ash 3">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.HuhfABETmavtskaPacsfLwHaEK?rs=1&pid=ImgDetMain" alt="Ash 4">
+            </div>
+        </div>
+        <p class="para">
+            Ash Ketchum, the legendary Pokémon trainer who started his journey from Pallet Town. His dream to become a Pokémon Master has inspired generations.
+        </p>
+    </div>
+
+    <!-- Brock Section -->
+    <div class="friend-section">
+        <h2 class="brock">Brock</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.DS2xDdZR2KJk7TShHmpw0wHaJE?rs=1&pid=ImgDetMain" alt="Brock 1">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.DOTK05bJTSEyXn_X9UBGIAHaLO?rs=1&pid=ImgDetMain" alt="Brock 2">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.DOTK05bJTSEyXn_X9UBGIAHaLO?rs=1&pid=ImgDetMain" alt="Brock 3">
+            </div>
+            <div class="image-card">
+                <img src="https://i.pinimg.com/originals/e3/c4/19/e3c4192b9cb9f5ca38d2e2158940d7f5.jpg" alt="Brock 4">
+            </div>
+        </div>
+        <p class="para">
+            Brock, the former Pewter City Gym Leader, is known for his expertise in Pokémon breeding and his dream to become the world's best Pokémon Breeder.
+        </p>
+    </div>
+
+    <!-- Tracey Section -->
+    <div class="friend-section">
+        <h2 class="tracey">Tracey Sketchit</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://vignette.wikia.nocookie.net/pokemony/images/0/07/EP086_Tracey.png/revision/latest?cb=20180128224453&path-prefix=pl" alt="Tracey 1">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.l3S2uATSfDyXmRFz1bu7-gHaFj?w=499&h=374&rs=1&pid=ImgDetMain" alt="Tracey 2">
+            </div>
+            <div class="image-card">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2a83af45-a55d-4846-9d36-899bf05d2f6e/dndf7v-68b39047-68a5-4d32-a46a-0f0f7e0660dc.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJhODNhZjQ1LWE1NWQtNDg0Ni05ZDM2LTg5OWJmMDVkMmY2ZVwvZG5kZjd2LTY4YjM5MDQ3LTY4YTUtNGQzMi1hNDZhLTBmMGY3ZTA2NjBkYy5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.vEe-9_su5Y5UXEANm_C8qdBdTFpA_jp5hGE_0vYaVRk" alt="Tracey 3">
+            </div>
+            <div class="image-card">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d304f3f3-baf0-43e9-8049-8674a1873404/ddyikto-506d52e8-71dd-49d5-a365-19937aa7e4fb.png/v1/fill/w_1009,h_792/tracey_sketchit_by_bhalsketchit_ddyikto-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2QzMDRmM2YzLWJhZjAtNDNlOS04MDQ5LTg2NzRhMTg3MzQwNFwvZGR5aWt0by01MDZkNTJlOC03MWRkLTQ5ZDUtYTM2NS0xOTkzN2FhN2U0ZmIucG5nIiwiaGVpZ2h0IjoiPD0xMDA0Iiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvZDMwNGYzZjMtYmFmMC00M2U5LTgwNDktODY3NGExODczNDA0XC9iaGFsc2tldGNoaXQtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.CUk-BaEeGXIUlt1uWT7ITB78b2A_6x3xVzZpG8HMLjQ" alt="Tracey 4">
+            </div>
+        </div>
+        <p class="para">
+            Tracey Sketchit, a talented Pokémon watcher and artist who joined Ash during his Orange Islands journey. His sketching skills are unmatched.
+        </p>
+    </div>
+
+    <!-- Dawn Section -->
+    <div class="friend-section">
+        <h2 class="dawn">Dawn</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://wallpaperaccess.com/full/5612914.jpg" alt="Dawn 1">
+            </div>
+            <div class="image-card">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6f303c4a-d5ff-44f0-96da-d4488e0b9074/dfmy1gw-4ca3e685-04d9-44f7-b059-4853f77f5017.png/v1/fill/w_670,h_1192,q_70,strp/pokemon_dawn_iphone_7_wallpaper_by_tetratitanio_dfmy1gw-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTMzNCIsInBhdGgiOiJcL2ZcLzZmMzAzYzRhLWQ1ZmYtNDRmMC05NmRhLWQ0NDg4ZTBiOTA3NFwvZGZteTFndy00Y2EzZTY4NS0wNGQ5LTQ0ZjctYjA1OS00ODUzZjc3ZjUwMTcucG5nIiwid2lkdGgiOiI8PTc1MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.v7JfRwQ8p56o3kjP3jyHwULyanRF33JDZPRo5H3X_2I" alt="Dawn 2">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.0Z_RAPutm7oBcoEU-AhklwHaKN?rs=1&pid=ImgDetMain" alt="Dawn 3">
+            </div>
+            <div class="image-card">
+                <img src="https://wallpapercave.com/wp/wp7633860.jpg" alt="Dawn 4">
+            </div>
+        </div>
+        <p class="para">
+            Dawn, a talented Pokémon Coordinator from Sinnoh region, known for her catchphrase "No need to worry!" and her dream to become a top Coordinator.
+        </p>
+    </div>
+
+    <!-- Iris Section -->
+    <div class="friend-section">
+        <h2 class="iris">Iris</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.QXTF2IP0lBrJctPeD8XUiwAAAA?rs=1&pid=ImgDetMain" alt="Iris 1">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.nQsBPGOaWmmyjyFOtl7bLwHaDt?rs=1&pid=ImgDetMain" alt="Iris 2">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.nQsBPGOaWmmyjyFOtl7bLwHaDt?rs=1&pid=ImgDetMain" alt="Iris 3">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.nQsBPGOaWmmyjyFOtl7bLwHaDt?rs=1&pid=ImgDetMain" alt="Iris 4">
+            </div>
+        </div>
+        <p class="para">
+            Iris, the dragon-type trainer from the Village of Dragons, aspires to become a Dragon Master. Her energetic personality and love for dragons make her unique.
+        </p>
+    </div>
+
+    <!-- Cilan Section -->
+    <div class="friend-section">
+        <h2 class="cilan">Cilan</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/09/Pokemon_Cilan_Takes_Flight.jpg" alt="Cilan 1">
+            </div>
+            <div class="image-card">
+                <img src="https://canvas-bridge02.tubitv.com/jolsAtiIhYddRAlvzEen167izBE=/640x360/smart/img.adrise.tv/c893f94c-1afd-4c07-867c-0167152406b8.jpg" alt="Cilan 2">
+            </div>
+            <div class="image-card">
+                <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/01/pokemon-brock-cilan.jpg" alt="Cilan 3">
+            </div>
+            <div class="image-card">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/09/Pokemon_Clemont_and_Cilan.jpg" alt="Cilan 4">
+            </div>
+        </div>
+        <p class="para">
+            Cilan, a Pokémon Connoisseur and former Striaton City Gym Leader. His expertise in evaluating Pokémon-Trainer relationships is as refined as his culinary skills.
+        </p>
+    </div>
+
+    <!-- Serena Section -->
+    <div class="friend-section">
+        <h2 class="serena">Serena</h2>
+        <div class="container">
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.Euxqwhyre339RAXsXlS9cgHaI7?rs=1&pid=ImgDetMain" alt="Serena 1">
+            </div>
+            <div class="image-card">
+                <img src="https://usercontent1.hubstatic.com/14150932.jpg" alt="Serena 2">
+            </div>
+            <div class="image-card">
+                <img src="https://i.pinimg.com/originals/e6/a3/af/e6a3afd11285cd5b1067e84fa4b00bdc.jpg" alt="Serena 3">
+            </div>
+            <div class="image-card">
+                <img src="https://th.bing.com/th/id/OIP.XcVPY3nU4DSbveo6UB7o1wHaKf?rs=1&pid=ImgDetMain" alt="Serena 4">
+            </div>
+        </div>
+        <p class="para">
+            Serena, a Pokémon Performer from the Kalos region, known for her determination and grace. Her journey from a shy trainer to a confident performer is truly inspiring.
+        </p>
+    </div>
+
+    <!-- Include the footer from index.html -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>About Friends Collection</h4>
+                    <p>Welcome to my friends collection! This is where I share memories with my favorite Pokémon companions who have been part of incredible journeys and adventures.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index 2.html">Anime Playlist</a></li>
+                        <li><a href="index 3.html">Friends Info</a></li>
+                        <li><a href="index 4.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Pokémon Regions</h4>
+                    <ul>
+                        <li>Kanto Region</li>
+                        <li>Johto Region</li>
+                        <li>Hoenn Region</li>
+                        <li>Sinnoh Region</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow For Updates</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/its_me_yukesh_uzumaki/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YA Tamilan. All rights reserved.</p>
+                <p class="credits">Built with help from 
+                    <a href="https://www.w3schools.com/" target="_blank">W3Schools</a> and 
+                    <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
